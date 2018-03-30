@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="supertv" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+	<!-- SuperTV Binding -->
+	<thing-type id="service">
+		<label>SuperTV Service Info</label>
+		<description>A test binding to SuperTV.</description>
+
+		<channels>
+			<channel id="status" typeId="statusInfo" />
+		</channels>
+
+		<config-description>
+		</config-description>
+	</thing-type>
+
+	<channel-type id="statusInfo">
+		<item-type>String</item-type>
+		<label>Presence</label>
+		<description>Current services' status.</description>
+		<category>Presence</category>
+		<state readOnly="true">
+		</state>
+	</channel-type>
+
+</thing:thing-descriptions>

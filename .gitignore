@@ -1,0 +1,10 @@
+target/
+src-gen/
+xtend-gen/
+bin/
+.antlr*
+.metadata/
+*/plugin.xml_gen
+.DS_Store
+*.iml
+.idea/
