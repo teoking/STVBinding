@@ -12,6 +12,8 @@
  */
 package teoking.smarthome.binding.stv.internal.connection;
 
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,21 +27,20 @@ public class SuperTVConnection {
 
     private final Logger logger = LoggerFactory.getLogger(SuperTVConnection.class);
 
-    private static final String WEBSERVICE_URL = "https://query.yahooapis.com/v1/public/yql?format=json";
+    private static final Random random = new Random();
 
-    private static final String METHOD = "GET";
+    public String getStvData(String svc) {
+        // Dummy now
+        return "Ready|" + getCpuTemperature() + "|" + getFreeMemory();
+    }
 
-    private static final int TIMEOUT = 10 * 1000; // 10s
+    private String getCpuTemperature() {
+        // Dummy now
+        return random.nextDouble() + "";
+    }
 
-    public String getResponseFromQuery(String query) {
-        /*
-         * try {
-         * return HttpUtil.executeUrl(METHOD,
-         * WEBSERVICE_URL + "&q=" + URLEncoder.encode(query, StandardCharsets.UTF_8.toString()), TIMEOUT);
-         * } catch (IOException e) {
-         * logger.warn("Communication error occurred while getting Yahoo weather information: {}", e.getMessage());
-         * }
-         */
-        return "Services Online";
+    private String getFreeMemory() {
+        // Dummy now
+        return random.nextInt(4000000) + "";
     }
 }
