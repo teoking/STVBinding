@@ -24,6 +24,7 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.config.core.status.ConfigStatusMessage;
 import org.eclipse.smarthome.core.cache.ExpiringCacheMap;
+import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.QuantityType;
 import org.eclipse.smarthome.core.library.types.StringType;
 import org.eclipse.smarthome.core.library.unit.SIUnits;
@@ -71,6 +72,7 @@ public class SuperTVHandler extends ConfigStatusThingHandler {
 
     @Override
     public void initialize() {
+        logger.debug("Initialize SuperTV handler...");
         Configuration config = getThing().getConfiguration();
         try {
             refresh = (BigDecimal) config.get(SuperTVBindingConstants.THING_CONFIG_REFRESH);
@@ -86,8 +88,6 @@ public class SuperTVHandler extends ConfigStatusThingHandler {
         cache.put(CACHE_KEY_STV_DATA, () -> connection.getStvData(""));
 
         startAutomaticRefresh();
-
-        logger.debug("initialize...");
     }
 
     @Override
@@ -153,15 +153,11 @@ public class SuperTVHandler extends ConfigStatusThingHandler {
     }
 
     private synchronized boolean updateServiceData() {
-        // If current data not expired, the device is online.
-        if (!isCurrentDataExpired()) {
-            updateStatus(ThingStatus.ONLINE);
-        }
-
         final String data = cache.get(CACHE_KEY_STV_DATA);
         if (data != null) {
             lastUpdateTime = System.currentTimeMillis();
             stvData = data;
+            updateStatus(ThingStatus.ONLINE);
             return true;
         }
         stvData = null;
@@ -185,14 +181,14 @@ public class SuperTVHandler extends ConfigStatusThingHandler {
             return new QuantityType<Temperature>(Double.parseDouble(StringUtils.split(stvData, '|')[1]),
                     SIUnits.CELSIUS);
         }
-        return StringType.EMPTY;
+        return QuantityType.ZERO;
     }
 
     private State getFreeMem() {
         if (stvData != null) {
-            return new StringType(StringUtils.split(stvData, '|')[2]);
+            return new DecimalType(StringUtils.split(stvData, '|')[2]);
         }
-        return StringType.EMPTY;
+        return DecimalType.ZERO;
     }
 
 }

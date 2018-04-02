@@ -11,8 +11,8 @@
 
 		<channels>
 			<channel id="status" typeId="status" />
-			<channel id="cpuTemp" typeId="cpuTemperature" />
-			<channel id="freeMem" typeId="freeMemory" />
+			<channel id="cpuTemperature" typeId="cpuTemperature" />
+			<channel id="freeMemory" typeId="freeMemory" />
 		</channels>
 
 		<config-description>
@@ -47,7 +47,7 @@
         <label>Free Memory</label>
         <description>Current host's free memory.</description>
         <category>Number</category>
-        <state readOnly="true">
+        <state readOnly="true" pattern="%d kb">
         </state>
     </channel-type>
 

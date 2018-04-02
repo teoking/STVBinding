@@ -30,7 +30,6 @@ public class SuperTVHandlerFactory extends BaseThingHandlerFactory {
 
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
-        System.out.println("============" + thingTypeUID.getAsString());
         return SUPPORTED_THING_TYPES_UIDS.contains(thingTypeUID);
     }
 
@@ -38,8 +37,6 @@ public class SuperTVHandlerFactory extends BaseThingHandlerFactory {
     protected ThingHandler createHandler(Thing thing) {
         ThingTypeUID thingTypeUID = thing.getThingTypeUID();
 
-        System.out.println("+++++++++11" + thingTypeUID.getAsString());
-        System.out.println("+++++++++22" + SuperTVBindingConstants.THING_TYPE_SUPERTV.getAsString());
         if (thingTypeUID.equals(SuperTVBindingConstants.THING_TYPE_SUPERTV)) {
             return new SuperTVHandler(thing);
         }

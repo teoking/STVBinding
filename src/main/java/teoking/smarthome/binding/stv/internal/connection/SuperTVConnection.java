@@ -36,11 +36,11 @@ public class SuperTVConnection {
 
     private String getCpuTemperature() {
         // Dummy now
-        return random.nextDouble() + "";
+        return 100 * random.nextDouble() + "";
     }
 
     private String getFreeMemory() {
         // Dummy now
-        return random.nextInt(4000000) + "";
+        return random.nextInt(24680000) + "";
     }
 }
